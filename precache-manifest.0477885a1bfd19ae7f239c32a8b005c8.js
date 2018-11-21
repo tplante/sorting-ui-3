@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/sorting-ui-3/static/js/runtime~main.ef566667.js"
   },
   {
-    "revision": "900a9000f891dc1aa18d",
-    "url": "/sorting-ui-3/static/js/main.900a9000.chunk.js"
+    "revision": "d2fb763a916428c99d52",
+    "url": "/sorting-ui-3/static/js/main.d2fb763a.chunk.js"
   },
   {
     "revision": "004a69309d7473033699",
     "url": "/sorting-ui-3/static/js/1.004a6930.chunk.js"
   },
   {
-    "revision": "900a9000f891dc1aa18d",
+    "revision": "d2fb763a916428c99d52",
     "url": "/sorting-ui-3/static/css/main.d5836b4d.chunk.css"
   },
   {
-    "revision": "d4dc636cc393c6e7dfbb5f500a4db87c",
+    "revision": "11bbeca1e36b26e74bc5bdecc3a1295e",
     "url": "/sorting-ui-3/index.html"
   }
 ];
