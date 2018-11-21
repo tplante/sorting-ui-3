@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, createRef } from "react";
 
 const options = [
   { candidate: "Barack Obama", selected: false },
@@ -53,7 +53,8 @@ const submitStyles = {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { options, submitted: false };
+    this.state = { ranks: [options[0]], options, submitted: false };
+    this.container = createRef();
   }
 
   handleChange = event => {
@@ -61,7 +62,11 @@ class App extends Component {
       target,
       target: { value, previousValue, id }
     } = event;
-    let { options } = this.state;
+    const {
+      container: { current: container },
+      state: { options, ranks }
+    } = this;
+    const menus = container.querySelectorAll("select");
     const hasPreviousValue = previousValue && previousValue !== "skip";
     if (hasPreviousValue) {
       const previousOptionIndex = options.findIndex(
@@ -72,9 +77,20 @@ class App extends Component {
     if (value !== "skip") {
       const optionIndex = options.findIndex(o => o.candidate === value);
       options[optionIndex].selected = true;
+      if (!hasPreviousValue) {
+        ranks.push({});
+      }
+    } else if (hasPreviousValue) {
+      const menuId = id.slice(-1);
+      menus.forEach(menu => {
+        const id = menu.id.slice(-1);
+        if (id > menuId) {
+          ranks.pop();
+        }
+      });
     }
     target.previousValue = value;
-    this.setState({ options });
+    this.setState({ options, ranks });
   };
 
   handleSubmit = () => {
@@ -85,14 +101,14 @@ class App extends Component {
     return (
       <React.Fragment>
         <h1 style={{ textAlign: "center" }}>Rank your favorite candidates</h1>
-        <form style={containerStyles}>
-          {this.state.options.map((_, i) => (
+        <form ref={this.container} style={containerStyles}>
+          {this.state.ranks.map((_, i) => (
             <div key={i} style={optionStyles}>
-              <label style={rankStyles} htmlFor={`options-${i}`}>
+              <label style={rankStyles} htmlFor={`menu-${i}`}>
                 {i + 1}
               </label>
               <select
-                id={`options-${i}`}
+                id={`menu-${i}`}
                 style={dropdownStyles}
                 onChange={this.handleChange}
               >
