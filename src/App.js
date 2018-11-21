@@ -67,6 +67,7 @@ class App extends Component {
       state: { options, ranks }
     } = this;
     const menus = container.querySelectorAll("select");
+    const menuId = id.slice(-1);
     const hasPreviousValue = previousValue && previousValue !== "skip";
     if (hasPreviousValue) {
       const previousOptionIndex = options.findIndex(
@@ -77,11 +78,10 @@ class App extends Component {
     if (value !== "skip") {
       const optionIndex = options.findIndex(o => o.candidate === value);
       options[optionIndex].selected = true;
-      if (!hasPreviousValue) {
+      if (!hasPreviousValue && menuId < options.length - 1) {
         ranks.push({});
       }
     } else if (hasPreviousValue) {
-      const menuId = id.slice(-1);
       menus.forEach((menu, i) => {
         const { value: menuValue } = menu;
         if (i > menuId) {
