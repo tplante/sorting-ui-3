@@ -82,10 +82,14 @@ class App extends Component {
       }
     } else if (hasPreviousValue) {
       const menuId = id.slice(-1);
-      menus.forEach(menu => {
-        const id = menu.id.slice(-1);
-        if (id > menuId) {
+      menus.forEach((menu, i) => {
+        const { value: menuValue } = menu;
+        if (i > menuId) {
           ranks.pop();
+          const option = options.find(o => o.candidate === menuValue);
+          if (option) {
+            option.selected = false;
+          }
         }
       });
     }
