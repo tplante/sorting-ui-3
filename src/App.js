@@ -41,7 +41,7 @@ const rankStyles = {
   borderRadius: "3px 0 0 3px"
 };
 const dropdownStyles = {
-  focus: "none"
+  fontSize: "15px"
 };
 const submitStyles = {
   ...buttonStyles,
